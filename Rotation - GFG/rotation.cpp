@@ -15,7 +15,7 @@ public:
 	        int m=l+(r-l)/2;
 	        int next=(m+1)%n;
 	        int prev=(m-1+n)%n;
-	        if(A[m]<=A[prev] and A[m]<=A[next]) return m;
+	        if(A[m]<=A[prev] && A[m]<=A[next]) return m;
 	        else if(A[m]>=A[0]) l=m+1;
 	        else r=m-1;
 	    }
