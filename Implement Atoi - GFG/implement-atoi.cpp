@@ -17,16 +17,16 @@ class Solution{
         int ans=0,count=0;
         int neg=1;
         for(int i=0;i<n;i++){
-         if(i==0&& str[i]=='-'){neg=-1;count++; continue;}
+         if(i==0&& str[i]=='-'){neg=-1; continue;}
             result=str[i]-'0';
             if(result>=0 && result<=9){
                 ans=ans*10+result;
-                count++;
+                // count++;
             }
-            // else return -1;
+         else return -1;
         }
-        if(count==n) return neg*ans;
-       return -1;
+         return neg*ans;
+       
     }
 };
 
