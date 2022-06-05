@@ -10,30 +10,30 @@ public:
                      ans[top][i]=count++;
                }
                 top++;
-                dir=1;
+                // dir=1;
             }
             else if(dir==1){
                 for(int i=top;i<=down;i++){
                      ans[i][right]=count++;
                 }
                 right--;
-                dir=2;
+                // dir=2;
             }
             else if(dir==2){
                 for(int i=right;i>=left;i--){
                      ans[down][i]=count++;
                 }
                 down--;
-                dir=3;
+                // dir=3;
             }
             else if(dir==3){
                 for(int i=down;i>=top;i--){
                      ans[i][left]=count++;
                 }
                 left++;
-                dir=0;
+                // dir=0;
             }
-           
+           dir=(dir+1)%4;
         }
         return ans;
     }
