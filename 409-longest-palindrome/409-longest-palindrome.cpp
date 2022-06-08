@@ -6,12 +6,10 @@ public:
         for(int i=0;i<s.length();i++){
             mp[s[i]]++;
         }
+        int flag=0;
         int greatestodd=INT_MIN;
         for(auto it:mp){
             if(it.second%2==0)ans+=it.second;
-            else if(it.second%2!=0){
-               greatestodd= max(greatestodd,it.second);
-            }
         }
         
         // cout<<"greatestOdd: "<<greatestodd<<endl;
@@ -21,15 +19,13 @@ public:
         //     cout<<"\tFrequency: "<<i.second<<endl;
         // }
             
-        if(greatestodd!=INT_MIN)
-            {
                 for(auto it:mp){
                     if(it.second%2!=0){
                         ans+=it.second - 1;
+                        flag=1;
                     }   
                 } 
-            ans+=1;
-        }
+           if(flag==1)return ans+1;
         
         return ans;
     }
