@@ -11,50 +11,60 @@
 class Solution {
 public:
     ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
-        int carry=0;
-        ListNode* temp1=l1,*temp2=l2;
-        ListNode *ans=new ListNode();
-        ListNode *t=ans;
-        while(temp1 && temp2){
-            int sum=0;
-            sum+=temp1->val;
-            sum+=temp2->val;
-            sum+=carry;
-            carry=sum/10;
-            sum=sum%10;
-            ListNode *temp=new ListNode(sum);
-            t->next=temp;
-            t=t->next;
-            temp1=temp1->next;
-            temp2=temp2->next;
-        }
+        vector<int> L1;
+        vector<int> L2;
+         ListNode* temp1=l1;
+         ListNode* temp2=l2;
         while(temp1){
-            int sum=0;
-            sum+=carry;
-            sum+=temp1->val;
-            carry=sum/10;
-            sum%=10;
-            ListNode *temp=new ListNode(sum);
-            t->next=temp;
-            t=t->next;
+            L1.push_back(temp1->val);
             temp1=temp1->next;
         }
-        while(temp2){
-            int sum=0;
-            sum+=carry;
-            sum+=temp2->val;
-            carry=sum/10;
-            sum%=10;
-            ListNode *temp=new ListNode(sum);
-            t->next=temp;
-            t=t->next;
+         while(temp2){
+            L2.push_back(temp2->val);
             temp2=temp2->next;
         }
-        if(carry==1){
-            ListNode *temp=new ListNode(carry);
-            t->next=temp;
-
+        if(L1.size()>L2.size()){
+            int size=L1.size()-L2.size();
+            //reverse(L2.begin(),L2.end());
+            while(size--)L2.push_back(0);
+            //reverse(L2.begin(),L2.end());
         }
-        return ans->next;
+        else{
+            int size=L2.size()-L1.size();
+            //reverse(L1.begin(),L1.end());
+            while(size--)L1.push_back(0);
+            //reverse(L1.begin(),L1.end());
+        }
+        vector<int> ans;
+        int carry=0;
+        for(int i=0;i<L2.size();i++)
+        {
+            int sum=L2[i]+L1[i]+carry;
+            //cout<<"sum: "<<sum<<endl;
+            carry=sum/10;
+            ans.push_back(sum%10);
+        }
+        if(carry!=0)
+        ans.push_back(carry);
+        //reverse(ans.begin() , ans.end());
+        
+        ListNode *sumHead=NULL;
+        ListNode *traverse=NULL;
+        for(int i=0;i<ans.size();i++) {
+            ListNode *temp = new ListNode(ans[i]);
+            
+            if(sumHead == NULL) {
+                sumHead=temp;
+                traverse=temp;
+            }
+            else {
+                traverse->next=temp;
+                traverse=temp;
+            }
+            
+        }
+        
+        
+        return sumHead;
     }
 };
