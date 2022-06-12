@@ -11,60 +11,34 @@
 class Solution {
 public:
     ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
-        vector<int> L1;
-        vector<int> L2;
-         ListNode* temp1=l1;
-         ListNode* temp2=l2;
-        while(temp1){
-            L1.push_back(temp1->val);
-            temp1=temp1->next;
-        }
-         while(temp2){
-            L2.push_back(temp2->val);
-            temp2=temp2->next;
-        }
-        if(L1.size()>L2.size()){
-            int size=L1.size()-L2.size();
-            //reverse(L2.begin(),L2.end());
-            while(size--)L2.push_back(0);
-            //reverse(L2.begin(),L2.end());
-        }
-        else{
-            int size=L2.size()-L1.size();
-            //reverse(L1.begin(),L1.end());
-            while(size--)L1.push_back(0);
-            //reverse(L1.begin(),L1.end());
-        }
-        vector<int> ans;
+        ListNode* sumhead=NULL;
+        ListNode* traverse=NULL;
         int carry=0;
-        for(int i=0;i<L2.size();i++)
-        {
-            int sum=L2[i]+L1[i]+carry;
-            //cout<<"sum: "<<sum<<endl;
+        while(l1||l2){
+            int x=(l1!=NULL)?l1->val:0;
+            int y=(l2!=NULL)?l2->val:0;
+            int sum=x+y+carry;
             carry=sum/10;
-            ans.push_back(sum%10);
-        }
-        if(carry!=0)
-        ans.push_back(carry);
-        //reverse(ans.begin() , ans.end());
-        
-        ListNode *sumHead=NULL;
-        ListNode *traverse=NULL;
-        for(int i=0;i<ans.size();i++) {
-            ListNode *temp = new ListNode(ans[i]);
-            
-            if(sumHead == NULL) {
-                sumHead=temp;
-                traverse=temp;
+            ListNode* temp3=new ListNode(sum%10);
+            if(sumhead==NULL){
+                sumhead=temp3;
+                traverse=temp3;
             }
-            else {
-                traverse->next=temp;
-                traverse=temp;
+            else{
+                traverse->next=temp3;
+                traverse=temp3;
             }
             
+            if(l1!=NULL)
+            l1=l1->next;
+            if(l2!=NULL)
+            l2=l2->next;
         }
-        
-        
-        return sumHead;
+        if(carry>0){
+             ListNode* temp3=new ListNode(carry);
+              traverse->next=temp3;
+              traverse=temp3;
+        }
+        return sumhead;
     }
 };
