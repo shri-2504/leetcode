@@ -1,21 +1,21 @@
 class MyHashSet {
 public:
-    int size=1000001;
-    int arr[1000001];
+    int n=1000001;
+    int v[1000001];
     MyHashSet() {
-       memset(arr,0,sizeof(arr)); 
+        memset(v,0,n);
     }
     
     void add(int key) {
-        arr[key]=1;
+        v[key]=1;
     }
     
     void remove(int key) {
-         arr[key]=0;
+        v[key]=0;
     }
     
     bool contains(int key) {
-        return arr[key];
+        return v[key];
     }
 };
 
