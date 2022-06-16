@@ -5,7 +5,7 @@ public:
 
 		// vector<int> vec;
 		int vec[n+1];
-		for(int i=0;i<n+1;i++)
+		for(int i=0;i<n;i++)
 		{
 			vec[i]=0;
 		}
